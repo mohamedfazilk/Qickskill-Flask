@@ -199,16 +199,20 @@ def profile():
 
 @app.route('/courses')
 def logged_in():
-    if "email" in session:
-        email = session["email"]
-        name = session["name"]
-        course = records.find_one({'email': email})['course']
-        if not course:
-            flash("You're not enrolled in any courses !", 'danger')
+    try:
+        if "email" in session:
+            email = session["email"]
+            name = session["name"]
+            course = records.find_one({'email': email})['course']
+            if not course:
+                flash("You're not enrolled in any courses !", 'danger')
 
-        # return render_template('profile.html', name=name.title(), email=email, authenticated=authenticated)
-        return render_template('dashboard.html', course=course, authenticated=True)
-    else:
+            # return render_template('profile.html', name=name.title(), email=email, authenticated=authenticated)
+            return render_template('dashboard.html', course=course, authenticated=True)
+        else:
+            return redirect(url_for("sign_in"))
+    except KeyError:
+        del session['email']
         return redirect(url_for("sign_in"))
 
 
