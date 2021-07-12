@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/YT-search" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/design/project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/fazil" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/fazil/fazil" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/fazil/shaheer" vcs="Git" />
   </component>

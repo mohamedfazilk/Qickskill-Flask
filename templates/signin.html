@@ -2,6 +2,7 @@
 
 {% block title %}Sign In{% endblock %}
 {% block content %}
+
 <!------------------------------------------------------------------------------->
 <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}">
 <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
@@ -15,7 +16,7 @@
 <!--    <meta name="HandheldFriendly" content="true">-->
 <!------------------------------------------------------------------------------->
 
-<div class="cont col-12 h-100 ">
+<div class="cont col-12 h-100 bg-light">
     <form action="/sign_in" method="post">
 
         <div class="row">

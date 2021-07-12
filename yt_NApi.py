@@ -47,7 +47,7 @@ def dated_url_for(endpoint, **values):
 
 
 allowed_categid = [27, 28]
-courses = ['web development', 'app development']
+courses = ['web development', 'app development', 'devops', 'machine learning']
 
 
 @app.route('/delete/<course_name>')
@@ -203,9 +203,9 @@ def logged_in():
         email = session["email"]
         name = session["name"]
         course = records.find_one({'email': email})['course']
-        if not course: flash("You're not enrolled in any courses !", 'danger')
+        if not course:
+            flash("You're not enrolled in any courses !", 'danger')
 
-        print(type(course))
         # return render_template('profile.html', name=name.title(), email=email, authenticated=authenticated)
         return render_template('dashboard.html', course=course, authenticated=True)
     else:
@@ -247,7 +247,7 @@ def sign_in():
 def logout():
     if "email" in session:
         session.pop("email", None)
-        return render_template("index.html")
+        return redirect(url_for("index"))
     else:
         return redirect(url_for("sign_in"))
 
@@ -417,9 +417,9 @@ def process(keyword):
     return f_data
 
 
+@app.route('/index', methods=['GET'])
 @app.route('/', methods=['GET'])
-@app.route('/index ', methods=['GET'])
-def hello_world():
+def index():
     if "email" in session:
         return render_template('index.html', authenticated=True)
     return render_template('index.html')

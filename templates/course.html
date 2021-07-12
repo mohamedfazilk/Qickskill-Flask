@@ -2,6 +2,11 @@
 {% block title %}{{ course_name }}{% endblock %}
 
 {% block content %}
+<style>
+    .img {
+  filter: grayscale(90%);
+}
+</style>
 
 <div class="container-fluid bg-light">
     <div style="">
@@ -9,15 +14,16 @@
             <br>
             <br>
             <br>
+                            <h1 class="text-dark mx-4">{{ search_keyword }}</h1><br>
+
             <div id="accordion">
                 <!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-
                 {% for i in range(data_count) %}
 
-                <div class="card" >
+                <div class="card">
                     <!--                    style="background: rgb(166,168,168);background: linear-gradient(90deg, rgba(166,168,168,1) 0%, rgba(230,229,229,1) 49%, rgba(166,168,168,1) 100%);"-->
-                    <div class="card-header"  id="heading{{ i }}">
+                    <div class="card-header" id="heading{{ i }}">
                         <h5 class="mb-0">
                             <button class="btn btn-link text-dark " data-toggle="collapse"
                                     data-target="#collapse{{ i }}"
@@ -59,24 +65,34 @@
                                         <div class="card-body">
                                             {% for j in complt_data[i]['videos'][k] %}
                                             {% if j != 'skill' %}
-                                            <div class="container p-7 border-primary text-primary mt-5 text-white">
-                                                <h1>{{ complt_data[i]['videos'][k][j]['title'] }}</h1>
+                                            <div class="container p-7 border-primary  mt-5 ">
+                                                <h3 class="text-dark ml-4 pl-2">{{ complt_data[i]['videos'][k][j]['title'] }}</h3>
                                                 <div class="container my-5">
-                                                    <div class="embed-responsive embed-responsive-16by9" style="border-radius: 15px; overflow: hidden;box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .3);" >
+                                                    <div class="embed-responsive embed-responsive-16by9"
+                                                         style="border-radius: 15px; overflow: hidden;box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .3);">
 
                                                         <iframe class="embed-responsive-item iframe"
                                                                 style="align-content: center;box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .3);"
                                                                 src="https://www.youtube.com/embed/{{ complt_data[i]['videos'][k][j]['v_id'] }}?rel=0&modestbranding=1"
                                                                 allowfullscreen></iframe>
-                                                        <br><br>
+                                                        <br>
                                                     </div>
                                                 </div>
-                                                <h3>views: {{ complt_data[i]['videos'][k][j]['view_count'] }}</h3><br>
-                                                <h3>likes: {{ complt_data[i]['videos'][k][j]['like_count'] }}</h3><br>
-                                                <h3>dislike: {{ complt_data[i]['videos'][k][j]['dislike_count'] }}</h3>
-                                                <br>
-                                                <h3>category : {{ complt_data[i]['videos'][k][j]['cid'] }}</h3>
-                                                <h3><a href="{{ complt_data[i]['videos'][k][j]['url'] }}">url</a></h3>
+                                                <div class="row ml-2">
+                                                    <div class="col-4">
+                                                    <img class="img" src="{{url_for('static', filename='img/eyeye.png')}}"><span class="text-secondary ml-1"><b>{{
+                                                    complt_data[i]['videos'][k][j]['view_count'] }}
+                                                    </b></span></div>
+                                                    <div class="col-4">
+                                                    <img src="{{url_for('static', filename='img/ico.png')}}"><span class="text-secondary ml-1"><b>{{
+                                                        complt_data[i]['videos'][k][j]['like_count'] }}</b></span></div>
+                                                        <div class="col-4">
+                                                    <img style=""
+                                                         src="{{url_for('static', filename='img/icons8.png')}}"><span class="text-secondary ml-1"><b>{{
+                                                            complt_data[i]['videos'][k][j]['dislike_count'] }}</b></span></div>
+
+                                                </div>
+
                                             </div>
                                             {% endif %}
                                             {% endfor %}
@@ -93,7 +109,7 @@
                             {% for j in complt_data[i] %}
                             {% if j != 'skill' and j!='nested' %}
                             <div class="container p-7 border-primary text-primary mt-5 text-white">
-                                <h1>{{ complt_data[i][j]['title'] }}</h1>
+                                <h3 class="text-dark ml-4 pl-2">{{ complt_data[i][j]['title'] }}</h3>
                                 <div class="container my-5">
                                     <div class="embed-responsive embed-responsive-16by9 "
                                          style="border-radius: 15px; overflow: hidden;box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .3);">
@@ -104,14 +120,22 @@
                                         <br><br>
                                     </div>
                                 </div>
-                                <div>Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-                                <div class="llikedislike " >
-                                    <i class="fa fa-eye fa_custom fa-x" >{{ complt_data[i][j]['view_count'] }}</i>
-                                    <i class="fa fa-thumbs-o-up" aria-hidden="true">{{ complt_data[i][j]['like_count'] }}</i>
-                                    <i class="fa fa-thumbs-o-down" aria-hidden="true" >{{ complt_data[i][j]['dislike_count'] }}</i>
+                                <div class="row ml-2">
+                                                    <div class="col-4">
+                                                    <img class="img" src="{{url_for('static', filename='img/eyeye.png')}}"><span class="text-secondary ml-1"><b>
+                                                    {{ complt_data[i][j]['view_count'] }}
+                                                    </b></span></div>
+                                                    <div class="col-4">
+                                                    <img src="{{url_for('static', filename='img/ico.png')}}"><span class="text-secondary ml-1"><b>{{
+                                                        complt_data[i][j]['like_count'] }}</b></span></div>
+                                                        <div class="col-4">
+                                                    <img style=""
+                                                         src="{{url_for('static', filename='img/icons8.png')}}"><span class="text-secondary ml-1"><b>{{
+                                                            complt_data[i][j]['dislike_count'] }}</b></span></div>
 
                                 </div>
-                                <h3><a href="{{ complt_data[i][j]['url'] }}">url</a></h3>
+
+
                             </div>
                             {% endif %}
                             {% endfor %}
@@ -126,7 +150,6 @@
                     </div>
                 </div>
                 {% endfor %}
-
 
 
                 <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->

@@ -3,7 +3,7 @@
 {% block title %}Login System{% endblock %}
 
 {% block content %}
-
+<div class="bg-light">
 {% if message  %}
     <div class="alert alert-secondary" role="alert">
         <p>{{ message }}</p>
@@ -22,4 +22,5 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 {% endblock %}
